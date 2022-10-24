@@ -6,7 +6,7 @@ from starlette.responses import JSONResponse
 router = APIRouter()
 
 
-@cbv(router)  # type: ignore
+@cbv(router)
 class DatasourcesCBV:
     @router.get("/book/{isbn}")
     def search_book(self, isbn: str) -> JSONResponse:
