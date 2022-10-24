@@ -1,0 +1,46 @@
+Error:
+  type: object
+  properties:
+    detail:
+      oneOf:
+        - type: string
+        - type: array
+          items:
+            type: string
+  required:
+    - detail
+  additionalProperties: false
+
+BookDataFound:
+  type: object
+  required:
+    - title
+    - author
+  properties:
+    title:
+      type: string
+    author:
+      oneOf:
+        - type: string
+        - type: array
+          items:
+            type: string
+    publishing:
+      type: string
+    published_on:
+      type: integer
+      minimum: 1
+    cover:
+      type: string
+    plot:
+      type: string
+    language:
+      oneOf:
+        - type: string
+        - type: array
+          items:
+            type: string
+    book_format:
+      type: string
+    author_portrait:
+      type: string

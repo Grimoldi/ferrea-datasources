@@ -1,0 +1,19 @@
+/book/{isbn}:
+  parameters:
+    - in: path
+      name: isbn
+      required: true
+      schema:
+        type: string
+  get:
+    summary: Returns the data found on the external datasources for a specific book, idetified by its ISBN.
+    operationId: getBookData
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookDataFound"
+      "404":
+        $ref: "#/components/responses/NotFound"
