@@ -11,7 +11,7 @@ Error:
     - detail
   additionalProperties: false
 
-BookDataFound:
+BookDatasource:
   type: object
   required:
     - title
@@ -20,11 +20,9 @@ BookDataFound:
     title:
       type: string
     author:
-      oneOf:
-        - type: string
-        - type: array
-          items:
-            type: string
+      type: array
+      items:
+        type: string
     publishing:
       type: string
     published_on:
@@ -35,11 +33,9 @@ BookDataFound:
     plot:
       type: string
     language:
-      oneOf:
-        - type: string
-        - type: array
-          items:
-            type: string
+      type: array
+      items:
+        type: string
     book_format:
       type: string
     author_portrait:

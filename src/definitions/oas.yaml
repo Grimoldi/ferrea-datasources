@@ -4,6 +4,9 @@ info:
   title: Datasourcers API
   description: API that allows external datasources to be integrated with Ferrea.
   version: 1.0.0
+  contact:
+    "name": "Eugenio Grimoldi"
+    "url": "https://github.com/Grimoldi/ferrea-datasources"
 
 paths: !include paths.yaml
 
@@ -11,3 +14,5 @@ components:
   responses: !include responses.yaml
 
   schemas: !include schemas.yaml
+
+tags: !include tags.yaml

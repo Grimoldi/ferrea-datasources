@@ -13,7 +13,7 @@ app = FastAPI(
     docs_url=f"/docs/{ferrea_app}",
 )
 
-models_path = Path(__file__).parent / "models"
+models_path = Path(__file__).parent / "definitions"
 YamlIncludeConstructor.add_to_loader_class(
     loader_class=yaml.FullLoader, base_dir=models_path
 )
