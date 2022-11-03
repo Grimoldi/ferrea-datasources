@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ferrea-datasources
+  namespace: ferrea-datasources
+  labels:
+    app: ferrea-datasources
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ferrea-datasources
+  template:
+    metadata:
+      labels:
+        app: ferrea-datasources
+    spec:
+      containers:
+        - name: ferrea-datasources
+          image: grimoldi/ferrea-datasources:1.0
+          ports:
+            - containerPort: 80
