@@ -3,7 +3,7 @@ from typing import Any
 
 import requests
 from attrs import define, field
-from ferrea.chassis import init_logger
+from ferrea.observability import init_logger
 
 
 @define

@@ -5,8 +5,7 @@ from typing import Any
 import jmespath
 import requests
 from attr import define, field
-from ferrea.chassis import init_logger
-from models.api_openlibrary import OpenLibraryAPI
+from ferrea.observability import init_logger
 from models.api_service import ApiService
 
 
