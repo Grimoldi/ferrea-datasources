@@ -19,7 +19,7 @@ spec:
         - name: ferrea-datasources
           image: grimoldi/ferrea-datasources:1.1
           envFrom:
-            - secretRef:
+            - configMapRef:
                 name: ferrea-app
           ports:
             - containerPort: 80

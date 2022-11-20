@@ -1,8 +1,7 @@
 apiVersion: v1
-kind: Secret
-type: Opaque
+kind: ConfigMap
 metadata:
   name: ferrea-app
   namespace: ferrea-datasources
 data:
-  FERREA_APP: ZGF0YXNvdXJjZXM=
+  FERREA_APP: datasources
