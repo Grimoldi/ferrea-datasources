@@ -6,6 +6,7 @@ import jmespath
 import requests
 from attr import define, field
 from ferrea.observability import init_logger
+
 from models.api_service import ApiService
 
 
@@ -53,7 +54,7 @@ class OpenLibraryService:
                 continue
 
             # removing query string and adding to final dict
-            portraits_url[author["name"]] = author_url.url.split("?")[0]
+            portraits_url[author["name"]] = author_url.url.split("?")[0]  # type: ignore
 
         if portraits_url != dict():
             return portraits_url
@@ -83,8 +84,8 @@ class OpenLibraryService:
         response = self.openlibary_api.get()
         if not response.ok:
             response = requests.Response()
-            response.status_code = 404
-            response.reason = "not_found"
+            response.status_code = 404  # type: ignore
+            response.reason = "not_found"  # type: ignore
 
         return response
 
@@ -131,4 +132,5 @@ class OpenLibraryService:
         self.openlibary_api.set_resource(resource)
         self.openlibary_api.set_query_string(qs)
 
+        return self.openlibary_api.get()
         return self.openlibary_api.get()

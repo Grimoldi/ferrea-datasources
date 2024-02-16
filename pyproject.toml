@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "ferrea-datasources"
+version = "0.1.0"
+description = "Microservice for Ferrea framework."
+authors = ["Eugenio Grimoldi"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+attrs = "^22.2.0"
+requests = "^2.31.0"
+ferrea = {git = "https://github.com/Grimoldi/pyferrea-chassis.git"}
+uvicorn = "^0.27.1"
+fastapi-utils = "^0.2.1"
+jmespath = "^1.0.1"
+
+[tool.ruff]
+# Allow imports relative to the "src" and "test" directories.
+src = ["src", "test"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

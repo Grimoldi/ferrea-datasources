@@ -7,6 +7,7 @@ import requests
 from attr import define, field
 from ferrea.models import Datasource
 from ferrea.observability import init_logger
+
 from models.api_service import ApiResponse, ApiService
 
 
@@ -35,7 +36,7 @@ class GoogleBooksService:
         """
         self.isbn = isbn
         gb_search_response = self._search_book()
-        if not gb_search_response.ok or not "items" in gb_search_response.json():
+        if not gb_search_response.ok or "items" not in gb_search_response.json():
             self.logger.warning(f"Unable to find book on GB for isbn: {isbn}")
             return  # book not found
 
@@ -64,7 +65,7 @@ class GoogleBooksService:
         """
         self.isbn = isbn
         gb_search_response = self._search_book()
-        if not gb_search_response.ok or not "items" in gb_search_response.json():
+        if not gb_search_response.ok or "items" not in gb_search_response.json():
             self.logger.warning(f"Unable to find book on GB for isbn: {isbn}")
             return  # book not found
 
@@ -90,8 +91,8 @@ class GoogleBooksService:
         response = self.googlebooks_api.get()
         if not response.ok:
             response = requests.Response()
-            response.status_code = 404
-            response.reason = "not_found"
+            response.status_code = 404  # type: ignore
+            response.reason = "not_found"  # type: ignore
 
         return response
 
@@ -110,8 +111,8 @@ class GoogleBooksService:
         response = self.googlebooks_api.get()
         if not response.ok:
             response = requests.Response()
-            response.status_code = 404
-            response.reason = "not_found"
+            response.status_code = 404  # type: ignore
+            response.reason = "not_found"  # type: ignore
 
         return response
 
