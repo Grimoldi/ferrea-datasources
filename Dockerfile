@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1
 
 ARG PYTHON_VERSION=3.11.8
-FROM python:${PYTHON_VERSION}-slim as base
+FROM python:${PYTHON_VERSION}-slim AS base
 
 # Prevent Python from writing pyc files to disk
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONDONTWRITEBYTECODE=1
 # Prevent Python from buffering stdout and sderr
-ENV PYTHONUNBEFFERED 1
+ENV PYTHONUNBEFFERED=1
 
 # set the working directory
 WORKDIR /app
