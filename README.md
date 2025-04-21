@@ -1,5 +1,9 @@
 # Ferrea-Datasources
 
+[![Python formatting](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/format.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/format.yaml)
+[![Docstrings](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/docstrings.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/docstrings.yaml)
+[![Testing](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/testing.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/testing.yaml)[![Build](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/build.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/build.yaml)
+
 Repo for Ferrea project. Dedicated to external datasources microservice.
 
 This microservice is responsible for providing automatic data for a new book in the library circuit.
