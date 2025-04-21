@@ -13,10 +13,15 @@ This microservice is made upon Fastapi that interacts with external API services
 ## Run as a docker container
 
 ``` bash
-docker run --name ferrea-ds -d -p 8080:80 --env FERREA_APP=datasources grimoldi/ferrea-datasources:<tag>
+docker run \
+  --name ferrea-ds \
+  --detach \
+  --publish 8080:80 \
+  --env FERREA_APP=datasources \
+  grimoldi/ferrea-datasources:<tag>
 ```
 
-Access it on `http://127.0.0.1:8000/docs/datasources`, for example.
+Access it on [http://127.0.0.1:8080/docs/datasources](http://127.0.0.1:8080/docs/datasources), for example.
 
 ## Run on Kubernetes
 
