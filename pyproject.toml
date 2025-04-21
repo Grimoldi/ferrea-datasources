@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ferrea-datasources"
-version = "0.1.0"
+version = "1.0.0"
 description = "Microservice for Ferrea framework."
 authors = ["Eugenio Grimoldi"]
 readme = "README.md"
