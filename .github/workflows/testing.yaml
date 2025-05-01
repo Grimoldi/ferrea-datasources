@@ -7,6 +7,10 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - "src/*.py"
+      - "tests/*.py"
+      - ".github/workflows/testing.yaml"
 
 jobs:
   perform-tests:

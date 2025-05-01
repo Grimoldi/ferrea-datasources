@@ -60,6 +60,9 @@ jobs:
       # Install dependencies if cache does not exist
       - name: Export requirements.txt
         run: poetry export -o ./requirements.txt --without-hashes --quiet --no-interaction
+
+      - name: Bump poetry version
+        run: poetry bump ${{ steps.meta.outputs.tags }}
            
       # Build and push image
       - name: Set up Docker Buildx

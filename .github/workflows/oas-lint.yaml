@@ -1,4 +1,4 @@
-name: Run Redocly linting
+name: Run OAS linting
 description: |
   # OpenApi definition automatic update and validation.
   Create a bundle file (using a redocly), than proceed to validate it against linting.
@@ -13,7 +13,7 @@ on:
         - main
       paths:
         - "oas/*.yaml"
-        - ".github/workflows/redocly.yaml"
+        - ".github/workflows/oas-lint.yaml"
 
 permissions:
   checks: write

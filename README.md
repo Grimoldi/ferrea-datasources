@@ -2,7 +2,7 @@
 
 [![Python formatting](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/format.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/format.yaml)
 [![Docstrings](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/docstrings.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/docstrings.yaml)
-[![Testing](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/testing.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/testing.yaml)[![Build](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/build.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/build.yaml)
+[![Testing](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/testing.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/testing.yaml)[![Build](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/build.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/build.yaml)[![OpenAPI definition linting](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/oas-lint.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/oas-lint.yaml)
 
 Repo for Ferrea project. Dedicated to external datasources microservice.
 
