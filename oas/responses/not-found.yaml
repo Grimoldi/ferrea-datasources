@@ -3,4 +3,4 @@ NotFound:
   content:
     application/json:
       schema:
-        $ref: "#/components/schemas/Error"
+        $ref: "../root.oas.yaml#/components/schemas/Error"

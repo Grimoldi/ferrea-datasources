@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  title: Datasourcers API
+  description: API that allows external datasources to be integrated with Ferrea.
+  version: 1.0.0
+  contact:
+    name: Eugenio Grimoldi
+    url: https://github.com/Grimoldi/ferrea-datasources
+servers:
+  - url: https://ferrea.local
+    description: Development local server
+tags:
+  - name: book
+    description: Book related operations.
+paths:
+  /book/{isbn}:
+    parameters:
+      - in: path
+        name: isbn
+        required: true
+        schema:
+          type: string
+    get:
+      description: Search data externally for a single book.
+      tags:
+        - book
+      summary: Returns the data found on the external datasources for a specific book, idetified by its ISBN.
+      operationId: getBookDatasource
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDatasource'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    BookDatasource:
+      type: object
+      required:
+        - title
+        - author
+      properties:
+        title:
+          type: string
+        author:
+          type: array
+          items:
+            type: string
+        publishing:
+          type: string
+        published_on:
+          type: integer
+          minimum: 1
+        cover:
+          type: string
+        plot:
+          type: string
+        language:
+          type: array
+          items:
+            type: string
+        book_format:
+          type: string
+        author_portrait:
+          type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+      required:
+        - detail
+      additionalProperties: false
+  responses:
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

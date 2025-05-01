@@ -41,5 +41,9 @@ USER appuser
 # copy the scripts to the folder
 COPY ./src .
 
+# copy openapi definitions
+WORKDIR /oas
+COPY ./oas/bundle.yaml /oas/bundle.yaml
+
 # start the server
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]

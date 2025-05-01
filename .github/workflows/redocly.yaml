@@ -1,0 +1,56 @@
+name: Run Redocly linting
+description: |
+  # OpenApi definition automatic update and validation.
+  Create a bundle file (using a redocly), than proceed to validate it against linting.
+  The bundle file will then be used from the web server.
+  In case of creation/update of the bundle file, autocommit it.
+
+  Run only if anything has been changed under the definitions or on this file itself.
+
+on:
+    push:
+      branches:
+        - main
+      paths:
+        - "oas/*.yaml"
+        - ".github/workflows/redocly.yaml"
+
+permissions:
+  checks: write
+  # Give the default GITHUB_TOKEN write permission to commit and push the
+  # added or changed files to the repository.
+  contents: write
+
+env:
+  OAS_PATH: ./oas/bundle.yaml
+  REDOCLY_VERSION: "redocly/cli@1.34.3"
+
+jobs:
+  build:
+    name: Redocly linting
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up node
+      uses: actions/setup-node@v4
+
+    - name: Install Redocly CLI
+      run: npm install -g @$REDOCLY_VERSION
+
+    - name: Remove previous bundle
+      run: rm -f $OAS_PATH  
+
+    - name: Run bundling
+      id: bundle
+      run: redocly bundle ./oas/*.yaml --output $OAS_PATH
+
+    - name: Run linting
+      run: redocly lint $OAS_PATH --format=markdown >> $GITHUB_STEP_SUMMARY
+
+    - name: Commit changed bundle file if updated
+      uses: stefanzweifel/git-auto-commit-action@v5
+      if: steps.bundle.outcome == 'success'
+      with:
+        commit_message: 'Added or updated the bundle.yaml oas definition.'

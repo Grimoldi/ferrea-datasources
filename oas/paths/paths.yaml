@@ -1,0 +1,23 @@
+GetBook:
+  parameters:
+    - in: path
+      name: isbn
+      required: true
+      schema:
+        type: string
+  get:
+    description: Search data externally for a single book.
+    security: []
+    summary: Returns the data found on the external datasources for a specific book, idetified by its ISBN.
+    tags:
+      - book
+    operationId: getBookDatasource
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "../root.oas.yaml#/components/schemas/BookDatasource"
+      "404":
+        $ref: "../root.oas.yaml#/components/responses/NotFound"

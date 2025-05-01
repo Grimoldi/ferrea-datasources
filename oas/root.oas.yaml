@@ -1,0 +1,39 @@
+openapi: 3.0.0
+
+info:
+  title: Datasourcers API
+  description: |
+    # Ferrea Datasource
+    This microservice expose an API that allows external datasources to be integrated with Ferrea.
+    Given an ISBN, it gather information from multiple source, in order to import them in the application.
+  version: 1.0.0
+  contact:
+    "name": "Eugenio Grimoldi"
+    "url": "https://github.com/Grimoldi/ferrea-datasources"
+  license:
+    name: MIT licence
+    url: https://mit-license.org/
+
+servers:
+  - url: https://ferrea.local
+    description: Development local server
+
+paths:
+  /book/{isbn}:
+    $ref: "paths/paths.yaml#/GetBook"
+
+components:
+  schemas:
+    BookDatasource:
+      $ref: "schemas/base.yaml#/BookDatasource"
+    Error:
+      $ref: "schemas/base.yaml#/Error"
+
+  responses:
+    NotFound:
+      $ref: "responses/not-found.yaml#/NotFound"
+
+tags: 
+  - name: book
+    description: Book related operations.
+
