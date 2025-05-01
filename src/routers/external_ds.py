@@ -1,11 +1,12 @@
 from fastapi import APIRouter
 from fastapi_utils.cbv import cbv
+from starlette import status
+from starlette.responses import JSONResponse
+
 from models.api_google import GoogleBooksAPI
 from models.api_openlibrary import OpenLibraryAPI
 from operations.service_google import GoogleBooksService
 from operations.service_openlibrary import OpenLibraryService
-from starlette import status
-from starlette.responses import JSONResponse
 
 router = APIRouter()
 
@@ -30,8 +31,8 @@ class DatasourcesCBV:
             JSONResponse: the data if found.
         """
         gb_api = GoogleBooksAPI("https://www.googleapis.com/books/v1")
-        ol_service = GoogleBooksService(gb_api)
-        book_data = ol_service.get_book_data(isbn)
+        gb_service = GoogleBooksService(gb_api)
+        book_data = gb_service.get_book_data(isbn)
         if book_data is None:
             return JSONResponse(
                 status_code=status.HTTP_404_NOT_FOUND, content={"detail": "not found"}

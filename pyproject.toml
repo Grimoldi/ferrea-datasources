@@ -16,10 +16,22 @@ jmespath = "^1.0.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.5"
+httpx = "^0.28.1"
+pytest-env = "^1.1.5"
 
 [tool.ruff]
 # Allow imports relative to the "src" and "test" directories.
 src = ["src", "test"]
+
+[tool.mypy]
+mypy_path = "src"
+--namespace-packages = "True"
+
+[tool.pytest.ini_options]
+pythonpath = "./src"
+
+[tool.pytest_env]
+FERREA_APP = "Datasources"
 
 [build-system]
 requires = ["poetry-core"]

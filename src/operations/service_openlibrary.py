@@ -102,7 +102,7 @@ class OpenLibraryService:
             list[dict[str, str]] | None: the list of the authors, if found.
             The list will contains a dictionary with two keys, "name" and "key" (the latter with the url of the author).
         """
-        authors_exp = jmespath.compile(f"*.details.authors")
+        authors_exp = jmespath.compile("*.details.authors")
         book_authors: list[list[dict[str, str]]] = authors_exp.search(ol_response)
 
         for authors in book_authors:
@@ -132,5 +132,4 @@ class OpenLibraryService:
         self.openlibary_api.set_resource(resource)
         self.openlibary_api.set_query_string(qs)
 
-        return self.openlibary_api.get()
         return self.openlibary_api.get()
