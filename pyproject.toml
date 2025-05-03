@@ -28,7 +28,10 @@ mypy_path = "src"
 --namespace-packages = "True"
 
 [tool.pytest.ini_options]
-pythonpath = "./src"
+pythonpath = [
+    "./src", 
+    "./tests"
+]
 
 [tool.pytest_env]
 FERREA_APP = "Datasources"

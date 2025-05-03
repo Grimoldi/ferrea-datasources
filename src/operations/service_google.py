@@ -38,16 +38,17 @@ class GoogleBooksService:
         gb_search_response = self._search_book()
         if not gb_search_response.ok or "items" not in gb_search_response.json():
             self.logger.warning(f"Unable to find book on GB for isbn: {isbn}")
-            return  # book not found
+            return None
 
         book_id = gb_search_response.json()["items"][0]["id"]
         gb_book_response = self._get_book(book_id)
 
         if not gb_book_response.ok:
             self.logger.warning(f"Unable to find book on GB for isbn: {isbn}")
-            return  # book not found
+            return None
 
         self.gb_response = gb_book_response.json()
+
         return self._parse_gb_data()
 
     def test_book_data(self, isbn: str) -> ApiResponse | None:
@@ -107,6 +108,7 @@ class GoogleBooksService:
             requests.Request: the response from google api.
         """
         self.googlebooks_api.set_resource(f"volumes/{book_id}")
+        self.googlebooks_api.set_query_string({})
 
         response = self.googlebooks_api.get()
         if not response.ok:
@@ -224,7 +226,7 @@ class GoogleBooksService:
         Returns:
             list[str]: the list of languages.
         """
-        return self._parse_response("volumeInfo.imageLinks.language")
+        return self._parse_response("volumeInfo.language")
 
     def _parse_book_format(self) -> str:
         """
