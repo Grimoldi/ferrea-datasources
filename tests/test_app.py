@@ -1,5 +1,5 @@
 import pytest
-from data_loader import ISBN, google_data, openlibrary_expected_data
+from data_loader import ISBN, google_expected_data, openlibrary_expected_data
 from fastapi.testclient import TestClient
 
 
@@ -18,6 +18,6 @@ def test_app() -> None:
 
     response = client.get(f"/book/{ISBN}")
 
-    expected_response_body = google_data.update(openlibrary_expected_data())
+    expected_response_body = google_expected_data.update(openlibrary_expected_data())
     assert response.status_code == 200
     assert response.json() == expected_response_body

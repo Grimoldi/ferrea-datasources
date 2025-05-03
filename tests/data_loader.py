@@ -17,7 +17,7 @@ def _load_test_data(filename: str) -> dict[str, Any]:
     return data
 
 
-def google_data() -> dict[str, Any]:
+def google_expected_data() -> dict[str, Any]:
     """Google books tests data."""
     return _load_test_data(GOOGLE_BOOKS_FILEDATA)
 
