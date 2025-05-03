@@ -1,5 +1,3 @@
-import pprint
-
 from data_loader import ISBN, google_data
 
 from models.api_google import GoogleBooksAPI
