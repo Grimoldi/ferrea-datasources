@@ -11,6 +11,7 @@ from starlette.responses import JSONResponse
 
 from adapters.googlebooks import GoogleBooksRepository
 from adapters.openlibrary import OpenLibraryRepository
+from models.api_service import ApiService
 from operations.data_search import fetch_data
 
 router = APIRouter()
@@ -29,6 +30,8 @@ class DatasourcesCBV:
         self,
         isbn: str,
         _id: Annotated[uuid.UUID, Depends(get_correlation_id)],
+        google_books_repository: Annotated[ApiService, Depends(GoogleBooksRepository)],
+        openlibrary_repository: Annotated[ApiService, Depends(GoogleBooksRepository)],
         response: Response,
     ) -> BookDatasource | JSONResponse:
         """
@@ -43,10 +46,11 @@ class DatasourcesCBV:
         context = Context(str(_id), "DTS")  # TODO: move to configuration management
         response.headers[FERRA_CORRELATION_HEADER] = str(_id)
 
-        google_books = GoogleBooksRepository(context)
-        openlibrary = OpenLibraryRepository(context)
-
-        book_data = fetch_data(isbn, [google_books, openlibrary], context)
+        book_data = fetch_data(
+            isbn,
+            [google_books_repository, openlibrary_repository],
+            context,
+        )
 
         if book_data is None:
             return JSONResponse(
