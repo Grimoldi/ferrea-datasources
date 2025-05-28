@@ -1,9 +1,10 @@
-from data_loader import ISBN
 from ferrea.core.context import Context
 from ferrea.models.datasource import BookDatasource
 from pydantic import HttpUrl
 
 from adapters.openlibrary import OpenLibraryRepository
+
+ISBN = "0060930314"
 
 
 def test_openlibrary_repository() -> None:

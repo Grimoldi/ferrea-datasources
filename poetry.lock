@@ -262,7 +262,7 @@ session = ["sqlalchemy (>=1.4,<3.0)"]
 
 [[package]]
 name = "ferrea"
-version = "2.1.0"
+version = "2.2.0"
 description = "Module for cross-cutting concerns designed for Ferrea application."
 optional = false
 python-versions = "^3.11"
@@ -283,8 +283,8 @@ pyyaml-include = "^2.2"
 [package.source]
 type = "git"
 url = "https://github.com/Grimoldi/ferrea-lib-chassis.git"
-reference = "27cdf22"
-resolved_reference = "27cdf22630b579853548665f60e9d11f75790c51"
+reference = "2.2.0"
+resolved_reference = "ca5d59231b4474f9bb1217c62f39caffeb288b4d"
 
 [[package]]
 name = "fsspec"
@@ -956,4 +956,4 @@ dev = ["black (>=19.3b0) ; python_version >= \"3.6\"", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "1b34715d15a49fbd8a4bd4fce26284909b76d3e78969df28f0a979759d626d9d"
+content-hash = "1d21012b11aa9c2b3fb5ed6e15570bbeb91de714e1f92d906d7abc5f38f2cf28"

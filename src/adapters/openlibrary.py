@@ -9,9 +9,11 @@ from ferrea.models.datasource import BookDatasource
 from ferrea.observability.logs import ferrea_logger
 from pydantic import HttpUrl
 
-OPENLIBRARY_API_BASE_URL = "https://openlibrary.org"  # TODO: move to configuration
+OPENLIBRARY_API_BASE_URL = (
+    "https://openlibrary.org"  # TODO: move to configuration management
+)
 OPENLIBRARY_COVER_BASE_URL = (
-    "https://covers.openlibrary.org"  # TODO: move to configuration
+    "https://covers.openlibrary.org"  # TODO: move to configuration management
 )
 
 BOOK_DATA = "book"

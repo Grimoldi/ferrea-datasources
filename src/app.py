@@ -1,12 +1,14 @@
 import os
 from pathlib import Path
 
-from ferrea import api
+from fastapi import FastAPI
+from ferrea.core.oas import add_openapi_schema
 
-from routers import external_ds
+from routers import datasources
 
-ferrea_app = os.environ["FERREA_APP"]
+ferrea_app = os.environ["FERREA_APP"]  # TODO: move to configuration management
 models_path = Path("/oas/bundle.yaml")
-app = api.init_api(models_path=models_path, ferrea_app=ferrea_app)
+app = FastAPI()
+app = add_openapi_schema(app, models_path)
 
-app.include_router(external_ds.router)
+app.include_router(datasources.router)
