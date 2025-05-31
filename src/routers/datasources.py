@@ -31,7 +31,7 @@ class DatasourcesCBV:
         isbn: str,
         _id: Annotated[uuid.UUID, Depends(get_correlation_id)],
         google_books_repository: Annotated[ApiService, Depends(GoogleBooksRepository)],
-        openlibrary_repository: Annotated[ApiService, Depends(GoogleBooksRepository)],
+        openlibrary_repository: Annotated[ApiService, Depends(OpenLibraryRepository)],
         response: Response,
     ) -> BookDatasource | JSONResponse:
         """

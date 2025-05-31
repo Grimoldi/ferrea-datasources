@@ -19,7 +19,7 @@ def test_openlibrary_repository() -> None:
         title="Identity",
         authors=["Milan Kundera"],
         publishing="Harper Perennial",
-        published_on=2000,
+        published_on=1999,
         cover=HttpUrl("https://covers.openlibrary.org/b/id/40647-M.jpg"),
         plot="A hotel in a small town on the Normandy coast, which they found in a guidebook.",
         languages=["eng"],

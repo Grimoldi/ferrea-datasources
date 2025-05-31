@@ -36,7 +36,7 @@ def test_googlebooks_repository() -> None:
     expected_data = BookDatasource(
         title="Identity",
         authors=["Milan Kundera"],
-        publishing="HarperCollins",
+        publishing="Harper Collins",
         published_on=1999,
         cover=COVER_URL,
         plot=PLOT,

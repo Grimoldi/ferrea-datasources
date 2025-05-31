@@ -1,4 +1,5 @@
 import os
+import re
 from dataclasses import dataclass
 from typing import Any
 
@@ -171,7 +172,7 @@ class OpenLibraryRepository:
             title=self._extract_value_from_key(f"{BOOK_DATA}.title"),
             authors=self._extract_value_from_key(f"{AUTHOR_DATA}[].name"),
             publishing=self._extract_value_from_key(f"{BOOK_DATA}.publishers[0]"),
-            published_on=2_000,
+            published_on=self._parse_published_on(),
             cover=HttpUrl(
                 f"{OPENLIBRARY_COVER_BASE_URL}/b/id/{self._extract_value_from_key(f'{BOOK_DATA}.covers[0]')}-M.jpg"
             ),
@@ -186,6 +187,29 @@ class OpenLibraryRepository:
             ],
             authors_portrait=self._datasource[PORTRAIT_DATA],
         )
+
+    def _parse_published_on(self) -> int | None:
+        """Try to parse the published date.
+        If it fails, return None.
+
+        Returns:
+            int | None: the year or None if not desumed.
+        """
+        date = self._extract_value_from_key(f"{BOOK_DATA}.publish_date")
+        if date is None:
+            return None
+
+        isodate_pattern = re.compile(r"^(?P<year>\d{4})-\d{2}-\d{2}$")
+        is_isodate = isodate_pattern.match(date)
+        if is_isodate:
+            return int(is_isodate.group("year"))
+
+        year_pattern = re.compile(r".*[\s|\-](?P<year>\d{4}).*?")
+        is_year = year_pattern.match(date)
+        if is_year:
+            return int(is_year.group("year"))
+
+        return None
 
     def _extract_value_from_key(
         self,
