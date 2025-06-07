@@ -6,13 +6,13 @@ authors = ["Eugenio Grimoldi"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.14"
 requests = "^2.31.0"
 uvicorn = "^0.27.1"
 fastapi-utils = "^0.8.0"
 jmespath = "^1.0.1"
 ferrea = {git = "https://github.com/Grimoldi/ferrea-lib-chassis.git", rev = "2.2.0"}
-dynaconf = "^3.2.11"
+dynaconf = {git = "https://github.com/dynaconf/dynaconf.git", rev = "32f3847"}
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.5"

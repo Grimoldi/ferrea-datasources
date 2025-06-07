@@ -132,3 +132,5 @@ dmypy.json
 ############ Custom
 # temp
 /chart
+# Ignore dynaconf secret files
+.secrets.*

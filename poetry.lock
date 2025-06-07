@@ -198,25 +198,34 @@ markers = {main = "platform_system == \"Windows\" or sys_platform == \"win32\"",
 
 [[package]]
 name = "dynaconf"
-version = "3.2.11"
+version = "3.3.0.dev0"
 description = "The dynamic configurator for your Python Project"
 optional = false
-python-versions = ">=3.8"
+python-versions = "<3.14,>=3.9"
 groups = ["main"]
-files = [
-    {file = "dynaconf-3.2.11-py2.py3-none-any.whl", hash = "sha256:660de90879d4da236f79195692a7d197957224d7acf922bcc6899187dc7b4a27"},
-    {file = "dynaconf-3.2.11.tar.gz", hash = "sha256:4cfc6a730c533bf1a1d0bf266ae202133a22236bb3227d23eff4b8542d4034a5"},
-]
+files = []
+develop = false
 
 [package.extras]
-all = ["configobj", "hvac", "redis", "ruamel.yaml"]
+all = ["dynaconf[ini,redis,toml,vault,yaml]"]
 configobj = ["configobj"]
+dev = ["dynaconf[docs,lint,misc,release,test]"]
+docs = ["Jinja2 (>3.0.0)", "mkdocs (>=1.1.2)", "mkdocs-autorefs", "mkdocs-git-revision-date-plugin", "mkdocs-material (>=5.3.2)", "mkdocs-material-extensions (>=1.0)", "mkdocstrings[python]", "pymdown-extensions"]
 ini = ["configobj"]
+lint = ["mypy", "pre-commit", "radon", "ruff", "typos"]
+misc = ["ipdb", "ipython (<=8.12.1)", "pdbr[ipython]"]
 redis = ["redis"]
-test = ["configobj", "django", "flask (>=0.12)", "hvac (>=1.1.0)", "pytest", "pytest-cov", "pytest-mock", "pytest-xdist", "python-dotenv", "radon", "redis", "toml"]
+release = ["build", "bump-my-version", "git-changelog", "python-minifier", "toml", "twine"]
+test = ["boto3", "commentjson", "configobj", "django", "django-debug-toolbar (>=4.3.0,<4.4.0)", "flask (>=1.0)", "hvac (>=1.1.0)", "ipython", "pytest", "pytest-cov", "pytest-docker", "pytest-mock", "pytest-xdist", "python-dotenv", "radon", "redis", "toml", "tox"]
 toml = ["toml"]
 vault = ["hvac"]
 yaml = ["ruamel.yaml"]
+
+[package.source]
+type = "git"
+url = "https://github.com/dynaconf/dynaconf.git"
+reference = "32f3847"
+resolved_reference = "32f38478350a80020e7aab60a3cbd29dd7f8d9ea"
 
 [[package]]
 name = "fastapi"
@@ -955,5 +964,5 @@ dev = ["black (>=19.3b0) ; python_version >= \"3.6\"", "pytest (>=4.6.2)"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = "^3.11"
-content-hash = "1d21012b11aa9c2b3fb5ed6e15570bbeb91de714e1f92d906d7abc5f38f2cf28"
+python-versions = ">=3.11,<3.14"
+content-hash = "02485b38bdc538784656cd8ca395a377689959c1e6ce6ef7898ef48a8c6c5577"
