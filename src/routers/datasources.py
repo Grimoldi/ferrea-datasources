@@ -11,6 +11,7 @@ from starlette.responses import JSONResponse
 
 from adapters.googlebooks import GoogleBooksRepository
 from adapters.openlibrary import OpenLibraryRepository
+from configs import settings
 from models.api_service import ApiService
 from operations.data_search import fetch_data
 
@@ -43,7 +44,7 @@ class DatasourcesCBV:
         Returns:
             BookDatasource | JSONResponse: the serialization of the object if found or a message for resource not found.
         """
-        context = Context(str(_id), "DTS")  # TODO: move to configuration management
+        context = Context(str(_id), settings.app.name)
         response.headers[FERRA_CORRELATION_HEADER] = str(_id)
 
         book_data = fetch_data(

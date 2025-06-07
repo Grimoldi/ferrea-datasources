@@ -1,0 +1,12 @@
+dynaconf_merge = true
+
+[app]
+name = "DTS"
+debug = true
+
+[google]
+api_url = "https://www.googleapis.com/books/v1"
+
+[openlibrary]
+api_url = "https://openlibrary.org"
+cover_url = "https://covers.openlibrary.org"

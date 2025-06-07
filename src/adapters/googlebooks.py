@@ -9,9 +9,9 @@ from ferrea.models.datasource import BookDatasource
 from ferrea.observability.logs import ferrea_logger
 from pydantic import HttpUrl
 
-GOOGLE_API_BASE_URL = (
-    "https://www.googleapis.com/books/v1"  # TODO: move to configuration management
-)
+from configs import settings
+
+GOOGLE_API_BASE_URL = settings.google.api_url
 
 BOOK_DATA = "book"
 AUTHOR_DATA = "author"
