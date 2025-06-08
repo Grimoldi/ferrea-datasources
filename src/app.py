@@ -3,6 +3,7 @@ from pathlib import Path
 import uvicorn
 from fastapi import FastAPI
 from ferrea.core.oas import add_openapi_schema
+from ferrea.observability.logs import setup_logger
 
 from configs import settings
 from routers import datasources
@@ -10,6 +11,7 @@ from routers import datasources
 
 def app() -> FastAPI:
     """Setup the app with custom logic."""
+    setup_logger()
     app = FastAPI()
     if settings.ferrea_app.oas_path is not None:
         app = add_openapi_schema(app, Path(settings.ferrea_app.oas_path))
