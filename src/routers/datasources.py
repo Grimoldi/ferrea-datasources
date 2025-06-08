@@ -1,9 +1,8 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Request, Response
+from fastapi import APIRouter, Depends, Request
 from ferrea.core.context import Context
 from ferrea.core.header import FERRA_CORRELATION_HEADER, get_correlation_id
-from ferrea.models.datasource import BookDatasource
 from starlette import status
 from starlette.responses import JSONResponse
 
@@ -62,8 +61,7 @@ def search_book_datasource(
     context: Annotated[Context, Depends(_build_context)],
     google_books_repository: Annotated[ApiService, Depends(_google_factory)],
     openlibrary_repository: Annotated[ApiService, Depends(_openlibrary_factory)],
-    response: Response,
-) -> BookDatasource | JSONResponse:
+) -> JSONResponse | str:
     """
     This function performs the search of the book's data on external datasources.
 
@@ -73,8 +71,9 @@ def search_book_datasource(
     Returns:
         BookDatasource | JSONResponse: the serialization of the object if found or a message for resource not found.
     """
-    response.headers[FERRA_CORRELATION_HEADER] = context.uuid
-    headers = {FERRA_CORRELATION_HEADER: context.uuid}
+    headers = {
+        FERRA_CORRELATION_HEADER: context.uuid,
+    }
 
     book_data = fetch_data(
         isbn,
@@ -89,4 +88,4 @@ def search_book_datasource(
             headers=headers,
         )
 
-    return book_data
+    return book_data.model_dump_json()
