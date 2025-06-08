@@ -1,6 +1,6 @@
 dynaconf_merge = true
 
-[app]
+[ferrea_app]
 name = "DTS"
 debug = true
 

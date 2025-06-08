@@ -7,21 +7,29 @@ config_dir = Path(__file__).parent
 
 
 class Openlibrary(DictValue):
+    """Settings for the Openlibrary datasource."""
+
     api_url: Annotated[str, Validator(startswith="https://")]
     cover_url: Annotated[str, Validator(startswith="https://")]
 
 
 class Google(DictValue):
+    """Settings for the Google Books datasource."""
+
     api_url: Annotated[str, Validator(startswith="https://")]
 
 
-class App(DictValue):
+class FerreaApp(DictValue):
+    """Settings for the app itself."""
+
     name: str
     debug: bool = False
 
 
 class FerreaSettings(Dynaconf):
-    app: App = App()  # type: ignore
+    """Overall settings for the webserver."""
+
+    ferrea_app: FerreaApp = FerreaApp()  # type: ignore
     google: Google = Google()  # type: ignore
     openlibrary: Openlibrary = Openlibrary()  # type: ignore
 
@@ -32,4 +40,4 @@ class FerreaSettings(Dynaconf):
     )
 
 
-settings = FerreaSettings()
+settings = FerreaSettings(_debug_mode=True)

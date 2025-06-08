@@ -44,7 +44,7 @@ class DatasourcesCBV:
         Returns:
             BookDatasource | JSONResponse: the serialization of the object if found or a message for resource not found.
         """
-        context = Context(str(_id), settings.app.name)
+        context = Context(str(_id), settings.ferrea_app.name)
         response.headers[FERRA_CORRELATION_HEADER] = str(_id)
 
         book_data = fetch_data(
