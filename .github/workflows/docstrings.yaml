@@ -27,6 +27,3 @@ jobs:
         uses: JackMcKew/python-interrogate-check@main
         with:
             path: 'src'
-            ignore-module: true
-            # seems to randomly make the job failing, although above the threshold
-            # verbose: true
