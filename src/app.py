@@ -10,8 +10,7 @@ from routers import datasources
 
 
 def app() -> FastAPI:
-    """Setup the app with custom logic."""
-    setup_logger()
+    """Setup the app with custom logic, as well as adding the routers."""
     app = FastAPI()
     if settings.ferrea_app.oas_path is not None:
         app = add_openapi_schema(app, Path(settings.ferrea_app.oas_path))
@@ -22,4 +21,12 @@ def app() -> FastAPI:
 
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", port=8080, log_level=None, factory=True, access_log=False)
+    setup_logger()
+    uvicorn.run(
+        "app:app",
+        port=8080,
+        log_level=None,
+        log_config=None,
+        factory=True,
+        access_log=False,
+    )
