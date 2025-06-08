@@ -24,6 +24,7 @@ class FerreaApp(DictValue):
 
     name: str
     debug: bool = False
+    oas_path: str | None = None
 
 
 class FerreaSettings(Dynaconf):
@@ -40,4 +41,4 @@ class FerreaSettings(Dynaconf):
     )
 
 
-settings = FerreaSettings(_debug_mode=True)
+settings = FerreaSettings(_debug_mode=False)
