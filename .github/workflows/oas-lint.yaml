@@ -1,11 +1,4 @@
 name: Run OAS linting
-description: |
-  # OpenApi definition automatic update and validation.
-  Create a bundle file (using redocly), than proceed to validate it against linting.
-  The bundle file will then be used from the web server.
-  In case of creation/update of the bundle file, autocommit it.
-
-  Run only if anything has been changed under the definitions or on this file itself.
 
 on:
     push:
