@@ -25,8 +25,8 @@ if __name__ == "__main__":
     uvicorn.run(
         "app:app",
         port=8080,
-        log_level=None,
-        log_config=None,
         factory=True,
         access_log=False,
+        log_level=None,
+        log_config=None,
     )
