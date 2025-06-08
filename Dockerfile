@@ -46,4 +46,4 @@ WORKDIR /oas
 COPY ./oas/bundle.yaml /oas/bundle.yaml
 
 # start the server
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app:app", "--factory", "--host", "0.0.0.0", "--port", "80"]
