@@ -1,3 +1,4 @@
+import json
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, Request
@@ -61,7 +62,7 @@ def search_book_datasource(
     context: Annotated[Context, Depends(_build_context)],
     google_books_repository: Annotated[ApiService, Depends(_google_factory)],
     openlibrary_repository: Annotated[ApiService, Depends(_openlibrary_factory)],
-) -> JSONResponse | str:
+) -> JSONResponse:
     """
     This function performs the search of the book's data on external datasources.
 
@@ -69,10 +70,11 @@ def search_book_datasource(
         isbn (str): the isbn of the desired book.
 
     Returns:
-        BookDatasource | JSONResponse: the serialization of the object if found or a message for resource not found.
+        JSONResponse: the serialization of the object if found or a message for resource not found.
     """
     headers = {
         FERRA_CORRELATION_HEADER: context.uuid,
+        "content-type": "application/json",
     }
 
     book_data = fetch_data(
@@ -82,10 +84,17 @@ def search_book_datasource(
     )
 
     if book_data is None:
-        return JSONResponse(
-            status_code=status.HTTP_404_NOT_FOUND,
-            content={"detail": "not found"},
-            headers=headers,
-        )
+        status_code = status.HTTP_404_NOT_FOUND
+        results = []
+    else:
+        status_code = status.HTTP_200_OK
+        results = [json.loads(book_data.model_dump_json())]
 
-    return book_data.model_dump_json()
+    return JSONResponse(
+        status_code=status_code,
+        content={
+            "items": len(results),
+            "result": results,
+        },
+        headers=headers,
+    )
