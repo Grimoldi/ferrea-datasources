@@ -25,7 +25,7 @@ ISBN = "0060930314"
 
 def test_googlebooks_repository() -> None:
     """Test Google Books service integration, happy path."""
-    repository = GoogleBooksRepository(Context("tst", "tst"))
+    repository = GoogleBooksRepository(Context("tst", "tst"), "OL")
     data = repository.search_for_book_info(ISBN)
 
     if data is None:

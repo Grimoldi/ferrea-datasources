@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 from app import app
 
 ISBN = "0060930314"
+ENDPOINT = "/api/v1/books"
 
 
 def test_app_happy_path() -> None:
@@ -10,7 +11,7 @@ def test_app_happy_path() -> None:
 
     client = TestClient(app())
 
-    response = client.get(f"/book/{ISBN}")
+    response = client.get(f"{ENDPOINT}/{ISBN}")
 
     assert response.status_code == 200
 
@@ -20,6 +21,6 @@ def test_app_not_found() -> None:
 
     client = TestClient(app())
 
-    response = client.get("/book/123456789")
+    response = client.get(f"{ENDPOINT}/123456789")
 
     assert response.status_code == 404

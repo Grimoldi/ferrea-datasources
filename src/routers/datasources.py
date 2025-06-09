@@ -15,7 +15,7 @@ from ._builders import _build_context, _google_factory, _openlibrary_factory
 router = APIRouter(prefix="/api/v1")
 
 
-@router.get("/book/{isbn}", response_model=None)
+@router.get("/books/{isbn}", response_model=None)
 async def search_book_datasource(
     isbn: str,
     context: Annotated[Context, Depends(_build_context)],

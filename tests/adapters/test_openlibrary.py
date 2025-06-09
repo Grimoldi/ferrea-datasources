@@ -9,7 +9,7 @@ ISBN = "0060930314"
 
 def test_openlibrary_repository() -> None:
     """Test OpenLibrary service integration, happy path."""
-    repository = OpenLibraryRepository(Context("tst", "tst"))
+    repository = OpenLibraryRepository(Context("tst", "tst"), "GB")
     data = repository.search_for_book_info(ISBN)
 
     if data is None:
