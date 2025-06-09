@@ -31,9 +31,7 @@ async def _openlibrary_factory(request: Request) -> OpenLibraryRepository:
         OpenLibraryRepository: the repository.
     """
     context = await _build_context(request)
-    return OpenLibraryRepository(
-        context, "OpenLibrary"
-    )  # TODO move to config management
+    return OpenLibraryRepository(context, settings.openlibrary.name)
 
 
 async def _google_factory(request: Request) -> GoogleBooksRepository:
@@ -46,6 +44,4 @@ async def _google_factory(request: Request) -> GoogleBooksRepository:
         GoogleBooksRepository: the repository.
     """
     context = await _build_context(request)
-    return GoogleBooksRepository(
-        context, "GoogleBooks"
-    )  # TODO move to config management
+    return GoogleBooksRepository(context, settings.google.name)

@@ -11,12 +11,14 @@ class Openlibrary(DictValue):
 
     api_url: Annotated[str, Validator(startswith="https://")]
     cover_url: Annotated[str, Validator(startswith="https://")]
+    name: str
 
 
 class Google(DictValue):
     """Settings for the Google Books datasource."""
 
     api_url: Annotated[str, Validator(startswith="https://")]
+    name: str
 
 
 class FerreaApp(DictValue):
