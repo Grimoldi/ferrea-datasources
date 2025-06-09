@@ -6,12 +6,16 @@ from models.api_service import ApiService
 
 
 def fetch_data(
-    isbn: str, datasources: list[ApiService], context: Context
+    isbn: str,
+    datasources: list[ApiService],
+    context: Context,
 ) -> BookDatasource | None:
     """From all the registered datasources, try to fetch the data.
 
     Args:
         isbn (str): the book isbn.
+        datasources (list[ApiService]): the list of all configured datasources.
+        context (Context): the api request context.
 
     Returns:
         BookDatasource | None: the instance with the fetched information or None if not found.

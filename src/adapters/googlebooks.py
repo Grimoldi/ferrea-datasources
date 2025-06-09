@@ -31,6 +31,7 @@ class GoogleBooksRepository:
     """
 
     context: Context
+    name: str
 
     def search_for_book_info(self, isbn: str) -> BookDatasource | None:
         """Search on Google Books the required isbn for book information.
@@ -181,3 +182,28 @@ class GoogleBooksRepository:
         """
         expression = jmespath.compile(jsonpath)
         return expression.search(self._datasource)
+
+    @property
+    def healthy(self) -> bool:
+        """Health check towards the datasource."""
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "FastAPI HealthCheck",
+        }
+        uri = f"{GOOGLE_API_BASE_URL}/volumes"
+
+        with httpx.Client() as client:
+            response = client.get(
+                uri,
+                headers=headers,
+                follow_redirects=True,
+            )
+
+        if not response.status_code == httpx.codes.BAD_REQUEST:
+            ferrea_logger.info(
+                (f"GoogleBooks probe failed with {response.status_code}"),
+                **self.context.log,
+            )
+            return False
+        return True

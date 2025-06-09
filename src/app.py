@@ -6,7 +6,7 @@ from ferrea.core.oas import add_openapi_schema
 from ferrea.observability.logs import setup_logger
 
 from configs import settings
-from routers import datasources
+from routers import datasources, probes
 
 
 def app() -> FastAPI:
@@ -16,6 +16,7 @@ def app() -> FastAPI:
         app = add_openapi_schema(app, Path(settings.ferrea_app.oas_path))
 
     app.include_router(datasources.router)
+    app.include_router(probes.router)
 
     return app
 
