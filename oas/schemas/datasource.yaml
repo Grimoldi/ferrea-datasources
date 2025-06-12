@@ -4,7 +4,6 @@ BookDatasource:
     items: 
       type: integer
       minimum: 0
-      exclusiveMinimum: false
 
     result:
       type: array
@@ -14,7 +13,7 @@ BookDatasource:
         properties:
           title:
             type: string
-          author:
+          authors:
             type: array
             items:
               type: string
@@ -23,19 +22,21 @@ BookDatasource:
           published_on:
             type: integer
             minimum: 0
-            exclusiveMinimum: false
           cover:
             type: string
             format: uri
           plot:
             type: string
-          language:
+            nullable: true
+          languages:
             type: array
             items:
               type: string
-          book_format:
-            type: string
-          author_portrait:
+          book_formats:
+            type: array
+            items:
+              type: string
+          authors_portrait:
             type: array
             items:
               type: string

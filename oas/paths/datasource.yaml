@@ -5,6 +5,16 @@ GetBook:
       required: true
       schema:
         type: string
+      examples:
+        Identity:
+          value: 0060930314
+          summary: Identity, by Milan Kundera.
+        theEyeOfTheWorld:
+          value: 0812511816
+          summary: The Eye of the World, by Robert Jordan.
+        definitelyNotAnISBN:
+          value: 1234567890
+          summary: an ISBN for no valid book.
   get:
     description: Search data externally for a single book.
     security: []
@@ -19,3 +29,46 @@ GetBook:
           application/json:
             schema:
               $ref: "../root.oas.yaml#/components/schemas/BookDatasource"
+            examples:
+              
+              Identity:
+                value:
+                  items: 1
+                  result:
+                  - title: Identity
+                    authors:
+                    - Milan Kundera
+                    publishing: Harper Perennial
+                    published_on: 1999
+                    cover: "https://covers.openlibrary.org/b/id/40647-M.jpg"
+                    plot: |
+                      "A hotel in a small town on the Normandy coast, which they found in a guidebook."
+                    languages:
+                    - eng
+                    book_formats:
+                    - edition
+                    authors_portrait:
+                    - "https://covers.openlibrary.org/a/olid/OL4326321A-M.jpg"
+                
+              theEyeOfTheWorld:
+                value:
+                  items: 1
+                  result:
+                  - title: The Eye of the World (The Wheel of Time, Book 1)
+                    authors:
+                    - Robert Jordan
+                    publishing: Tor Fantasy
+                    published_on: 1990
+                    cover: "https://covers.openlibrary.org/b/id/603208-M.jpg"
+                    plot: null
+                    languages:
+                    - eng
+                    book_formats:
+                    - edition
+                    authors_portrait:
+                    - "https://covers.openlibrary.org/a/olid/OL233594A-M.jpg"
+                
+              definitelyNotAnISBN:
+                value:
+                  items: 0
+                  result: []

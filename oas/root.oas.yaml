@@ -24,6 +24,9 @@ servers:
   - url: https://ferrea.local
     description: Development local server
 
+  - url: http://localhost:8080
+    description: Client tests
+
 
 paths:
   /api/v1/books/{isbn}:

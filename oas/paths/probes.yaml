@@ -13,6 +13,11 @@ Readiness:
           application/json:
             schema:
               $ref: "../root.oas.yaml#/components/schemas/Probe"
+            example:
+              status: healthy
+              entities:
+              - name: webserver
+                status: healthy
       "503":
         description: Service unavailable. The webserver is not started yet.
         content:
@@ -35,9 +40,23 @@ Liveness:
           application/json:
             schema:
               $ref: "../root.oas.yaml#/components/schemas/Probe"
+            example:
+              status: healthy
+              entities:
+              - name: GoogleBooks
+                status: healthy
+              - name: OpenLibrary
+                status: healthy
       "503":
         description: Service unavailable. At least one of its dependencies is unhealthy.
         content:
           application/json:
             schema:
               $ref: "../root.oas.yaml#/components/schemas/Probe"
+            example:
+              status: unhealthy
+              entities:
+              - name: GoogleBooks
+                status: unhealthy
+              - name: OpenLibrary
+                status: healthy
