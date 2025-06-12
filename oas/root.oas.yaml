@@ -26,13 +26,13 @@ servers:
 
 
 paths:
-  api/v1/books/{isbn}:
+  /api/v1/books/{isbn}:
     $ref: "paths/datasource.yaml#/GetBook"
 
-  _/health:
+  /_/health:
     $ref: "paths/probes.yaml#/Liveness"
 
-  _/ready:
+  /_/ready:
     $ref: "paths/probes.yaml#/Readiness"
 
 
