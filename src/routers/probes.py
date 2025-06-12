@@ -7,7 +7,7 @@ from starlette.responses import JSONResponse
 
 from models.api_service import ApiService
 from models.probes import HealthStatus
-from operations.probes import check_health
+from operations.probes import check_health, check_readiness
 
 from ._builders import _google_factory, _openlibrary_factory
 
@@ -26,11 +26,18 @@ async def readiness() -> JSONResponse:
         "content-type": "application/json",
     }
 
+    health = check_readiness()
+
+    if health.status == HealthStatus.HEALTHY:
+        return JSONResponse(
+            status_code=status.HTTP_200_OK,
+            content=json.loads(health.model_dump_json()),
+            headers=headers,
+        )
+
     return JSONResponse(
-        status_code=status.HTTP_200_OK,
-        content={
-            "ready": "Healthy",
-        },
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        content=json.loads(health.model_dump_json()),
         headers=headers,
     )
 

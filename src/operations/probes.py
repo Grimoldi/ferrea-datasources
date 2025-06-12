@@ -32,3 +32,23 @@ def check_health(datasources: list[ApiService]) -> HealthProbe:
         status = HealthStatus.HEALTHY
 
     return HealthProbe(status=status, entities=entities)
+
+
+def check_readiness() -> HealthProbe:
+    """Just return if the web server is running.
+
+    Returns:
+        HealthProbe: the health probe instance.
+    """
+    entities: list[Entity] = list()
+
+    entities.append(
+        Entity(
+            name="webserver",
+            status=HealthStatus.HEALTHY,
+            internal_status=True,
+        )
+    )
+    status = HealthStatus.HEALTHY
+
+    return HealthProbe(status=status, entities=entities)
