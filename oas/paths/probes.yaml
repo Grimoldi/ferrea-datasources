@@ -4,7 +4,7 @@ Readiness:
     security: []
     summary: Returns if the webserver is healthy or not.
     tags:
-      - probe
+      - probes
     operationId: getHealthProbe
     responses:
       "200":
@@ -31,7 +31,7 @@ Liveness:
     security: []
     summary: Returns if the webserver is able to engage on its dependencies or not.
     tags:
-      - probe
+      - probes
     operationId: getLivenessProbe
     responses:
       "200":

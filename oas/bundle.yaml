@@ -32,20 +32,20 @@ paths:
           type: string
         examples:
           Identity:
-            value: 60930314
+            value: '0060930314'
             summary: Identity, by Milan Kundera.
           theEyeOfTheWorld:
-            value: 812511816
+            value: '0812511816'
             summary: The Eye of the World, by Robert Jordan.
           definitelyNotAnISBN:
-            value: 1234567890
+            value: '1234567890'
             summary: an ISBN for no valid book.
     get:
       description: Search data externally for a single book.
       security: []
       summary: Returns the data found on the external datasources for a specific book, idetified by its ISBN.
       tags:
-        - book
+        - books
       operationId: getBookDatasource
       responses:
         '200':
@@ -100,7 +100,7 @@ paths:
       security: []
       summary: Returns if the webserver is able to engage on its dependencies or not.
       tags:
-        - probe
+        - probes
       operationId: getLivenessProbe
       responses:
         '200':
@@ -135,7 +135,7 @@ paths:
       security: []
       summary: Returns if the webserver is healthy or not.
       tags:
-        - probe
+        - probes
       operationId: getHealthProbe
       responses:
         '200':
