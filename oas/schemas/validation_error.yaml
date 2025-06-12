@@ -20,3 +20,4 @@ ValidationError:
   required:
     - detail
   additionalProperties: false
+  
