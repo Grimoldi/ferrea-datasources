@@ -36,7 +36,7 @@ Liveness:
             schema:
               $ref: "../root.oas.yaml#/components/schemas/Probe"
       "503":
-        description: Service unavailable. At least one of its dependencies is healthy.
+        description: Service unavailable. At least one of its dependencies is unhealthy.
         content:
           application/json:
             schema:
