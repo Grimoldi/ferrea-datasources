@@ -41,8 +41,8 @@ components:
     BookDatasource:
       $ref: "schemas/datasource.yaml#/BookDatasource"
 
-    Error:
-      $ref: "schemas/error.yaml#/Error"
+    ValidationError:
+      $ref: "schemas/validation_error.yaml#/ValidationError"
 
     Probe:
       $ref: "schemas/probe.yaml#/Probe"
