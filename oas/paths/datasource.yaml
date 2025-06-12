@@ -19,5 +19,3 @@ GetBook:
           application/json:
             schema:
               $ref: "../root.oas.yaml#/components/schemas/BookDatasource"
-      "404":
-        $ref: "../root.oas.yaml#/components/responses/NotFound"

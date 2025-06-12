@@ -1,0 +1,43 @@
+Readiness:
+  get:
+    description: Verify the webserver health.
+    security: []
+    summary: Returns if the webserver is healthy or not.
+    tags:
+      - probe
+    operationId: getHealthProbe
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "../root.oas.yaml#/components/schemas/Probe"
+      "503":
+        description: Service unavailable. The webserver is not started yet.
+        content:
+          application/json:
+            schema:
+              $ref: "../root.oas.yaml#/components/schemas/Probe"
+
+Liveness:
+  get:
+    description: Verify the webserver's dependencies health.
+    security: []
+    summary: Returns if the webserver is able to engage on its dependencies or not.
+    tags:
+      - probe
+    operationId: getLivenessProbe
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "../root.oas.yaml#/components/schemas/Probe"
+      "503":
+        description: Service unavailable. At least one of its dependencies is healthy.
+        content:
+          application/json:
+            schema:
+              $ref: "../root.oas.yaml#/components/schemas/Probe"

@@ -1,0 +1,42 @@
+BookDatasource:
+  type: object
+  properties:
+    items: 
+      type: interger
+      minimum: 0
+      exclusiveMinimum: false
+
+    result:
+      type: array
+      minItems: 0
+      items:
+        type: object
+        properties:
+          title:
+            type: string
+          author:
+            type: array
+            items:
+              type: string
+          publishing:
+            type: string
+          published_on:
+            type: integer
+            minimum: 0
+            exclusiveMinimum: false
+          cover:
+            type: string
+            format: uri
+          plot:
+            type: string
+          language:
+            type: array
+            items:
+              type: string
+          book_format:
+            type: string
+          author_portrait:
+            type: array
+            items:
+              type: string
+              format: uri
