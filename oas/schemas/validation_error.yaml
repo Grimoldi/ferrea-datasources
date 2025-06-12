@@ -13,9 +13,9 @@ ValidationError:
             items:
               type: string
           msg:
-            type: str
+            type: string
           input:
-            type: str
+            type: string
             nullable: true
   required:
     - detail
