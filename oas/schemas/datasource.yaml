@@ -2,7 +2,7 @@ BookDatasource:
   type: object
   properties:
     items: 
-      type: interger
+      type: integer
       minimum: 0
       exclusiveMinimum: false
 

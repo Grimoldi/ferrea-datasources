@@ -17,11 +17,11 @@ ValidationError:
           input:
             type: string
             nullable: true
-          required:
-          - type
-          - loc
-          - msg
-          - input
+        required:
+        - type
+        - loc
+        - msg
+        - input
   required:
     - detail
   additionalProperties: false

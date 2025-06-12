@@ -16,10 +16,12 @@ servers:
   - url: https://ferrea.local
     description: Development local server
 tags:
-  - name: book
+  - name: books
     description: Book related operations.
+  - name: probes
+    description: internal probes.
 paths:
-  /book/{isbn}:
+  /api/v1/books/{isbn}:
     parameters:
       - in: path
         name: isbn
@@ -40,55 +42,141 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookDatasource'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /_/health:
+    get:
+      description: Verify the webserver's dependencies health.
+      security: []
+      summary: Returns if the webserver is able to engage on its dependencies or not.
+      tags:
+        - probe
+      operationId: getLivenessProbe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Probe'
+        '503':
+          description: Service unavailable. At least one of its dependencies is unhealthy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Probe'
+  /_/ready:
+    get:
+      description: Verify the webserver health.
+      security: []
+      summary: Returns if the webserver is healthy or not.
+      tags:
+        - probe
+      operationId: getHealthProbe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Probe'
+        '503':
+          description: Service unavailable. The webserver is not started yet.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Probe'
 components:
   schemas:
     BookDatasource:
       type: object
-      required:
-        - title
-        - author
       properties:
-        title:
-          type: string
-        author:
-          type: array
-          items:
-            type: string
-        publishing:
-          type: string
-        published_on:
+        items:
           type: integer
-          minimum: 1
-        cover:
-          type: string
-        plot:
-          type: string
-        language:
+          minimum: 0
+          exclusiveMinimum: false
+        result:
           type: array
+          minItems: 0
           items:
-            type: string
-        book_format:
-          type: string
-        author_portrait:
-          type: string
-    Error:
+            type: object
+            properties:
+              title:
+                type: string
+              author:
+                type: array
+                items:
+                  type: string
+              publishing:
+                type: string
+              published_on:
+                type: integer
+                minimum: 0
+                exclusiveMinimum: false
+              cover:
+                type: string
+                format: uri
+              plot:
+                type: string
+              language:
+                type: array
+                items:
+                  type: string
+              book_format:
+                type: string
+              author_portrait:
+                type: array
+                items:
+                  type: string
+                  format: uri
+    ValidationError:
       type: object
       properties:
         detail:
-          oneOf:
-            - type: string
-            - type: array
-              items:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
                 type: string
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              input:
+                type: string
+                nullable: true
+            required:
+              - type
+              - loc
+              - msg
+              - input
       required:
         - detail
       additionalProperties: false
-  responses:
-    NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Probe:
+      type: object
+      required:
+        - status
+        - entities
+      properties:
+        status:
+          type: string
+          enum:
+            - healthy
+            - unhealthy
+        entities:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+                enum:
+                  - healthy
+                  - unhealthy
+            required:
+              - name
+              - status
