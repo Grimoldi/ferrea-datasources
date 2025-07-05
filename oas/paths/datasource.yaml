@@ -80,6 +80,7 @@ GetBook:
                 value:
                   items: 0
                   result: []
+                  
       "422":
         description: Unprocessable Entity
         content:
