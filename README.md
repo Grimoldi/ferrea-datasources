@@ -4,43 +4,28 @@
 [![Docstrings](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/docstrings.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/docstrings.yaml)
 [![Testing](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/testing.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/testing.yaml)[![Build](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/build.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/build.yaml)[![OpenAPI definition linting](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/oas-lint.yaml/badge.svg)](https://github.com/Grimoldi/ferrea-datasources/actions/workflows/oas-lint.yaml)
 
-Repo for Ferrea project. Dedicated to external datasources microservice.
+Repo related to my [Ferrea](https://github.com/Grimoldi/ferrea) personal project, dedicated for the `Datasource` microservice.
 
-This microservice is responsible for providing automatic data for a new book in the library circuit.
+This microservice is responsible for fetching data about a book, avoiding data entry.
 
-This microservice is made upon Fastapi that interacts with external API services (at the moment [OpenLibrary](https://openlibrary.org/developers/api) and [Google Books](https://developers.google.com/books)).
+It queries external API services (at the moment [OpenLibrary](https://openlibrary.org/developers/api) and [Google Books](https://developers.google.com/books)).
 
-## Run as a docker container
+## Configuration
 
-``` bash
-docker run \
-  --name ferrea-ds \
-  --detach \
-  --publish 8080:80 \
-  --env FERREA_APP=datasources \
-  grimoldi/ferrea-datasources:<tag>
-```
+The project uses [Dynaconf](https://www.dynaconf.com/) for its configuration.
 
-Access it on [http://127.0.0.1:8080/docs/datasources](http://127.0.0.1:8080/docs/datasources), for example.
+Apart from manually change/override [settings.toml](./src/configs/settings.toml) and [.secrets.toml](./src/configs/.secrets.toml), every key can be injected as an env var. Just prefix it with `FERREA_` (eg `FERREA_FERREA_APP__NAME=MY_NAME`) to change the value of the shortname (under the variable `settings.ferrea_app.name`).
+
+Refer to the [documentation](https://www.dynaconf.com/envvars/#custom-prefix) for more details.
 
 ## Run on Kubernetes
 
-Apply the manifests you can find under k8s folder.
+The application is meant to be run on Kubernetes.
 
-``` bash
-kubectl apply -f k8s/
-```
-
-## Web service structure
-
-The web service has three distinct layers:
-
-- web api layer: the routing of the api (./src/routers folder).
-- business logic layer: the logic under the hood (./src/operations folder).
-- data layer: how to access to the data (./src/models folder).
+Although previously I had some manifest for the Deployment creation and so on, I decided to remove that from here, and later use a repository to more adhere to the GitOPS principles.
 
 ### Openapi Schema
 
-You can find the OpenApi exposed under the */docs/datasources* endpoint.
+You can find the OpenApi exposed under the `/docs` endpoint.
 
-The OpenApi definitions are stored under the ./src/definitions folder.
+The OpenApi definitions are stored under the [oas (OpenApi Schema) folder](./oas).
