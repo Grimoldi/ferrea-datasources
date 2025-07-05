@@ -5,6 +5,7 @@ GetBook:
       required: true
       schema:
         type: string
+        pattern: '^[\d|\-]{10-17}$'
       examples:
         Identity:
           value: "0060930314"
@@ -12,9 +13,16 @@ GetBook:
         theEyeOfTheWorld:
           value: "0812511816"
           summary: The Eye of the World, by Robert Jordan.
-        definitelyNotAnISBN:
+        definitelyNotAnExistingISBN:
           value: "1234567890"
-          summary: an ISBN for no valid book.
+          summary: an ISBN for no existing book.
+        ISBNTooShort:
+          value: "1234"
+          summary: a too short ISBN that would raise an error.
+        ISBNTooLong:
+          value: "1234567891011121314151617"
+          summary: a too long ISBN that would raise an error.
+          
   get:
     description: Search data externally for a single book.
     security: []
@@ -68,7 +76,36 @@ GetBook:
                     authors_portrait:
                     - "https://covers.openlibrary.org/a/olid/OL233594A-M.jpg"
                 
-              definitelyNotAnISBN:
+              definitelyNotAnExistingISBN:
                 value:
                   items: 0
                   result: []
+      "422":
+        description: Unprocessable Entity
+        content:
+          application/json:
+            schema:
+              $ref: "../root.oas.yaml#/components/schemas/ValidationError"
+            examples:
+              
+              ISBNTooShort:
+                detail:
+                - type: string_too_short
+                  loc:
+                  - path
+                  - isbn
+                  msg: String should have at least 10 characters
+                  input: 1234
+                  ctx:
+                    min_length: 10
+              
+              ISBNTooLong:
+                detail:
+                - type: string_too_long
+                  loc:
+                  - path
+                  - isbn
+                  msg: String should have at least 17 characters
+                  input: 1234567891011121314151617
+                  ctx:
+                    max_length: 17

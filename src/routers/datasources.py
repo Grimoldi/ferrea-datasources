@@ -1,7 +1,7 @@
 import json
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Path
 from ferrea.core.context import Context
 from ferrea.core.header import FERRA_CORRELATION_HEADER
 from starlette import status
@@ -17,7 +17,14 @@ router = APIRouter(prefix="/api/v1")
 
 @router.get("/books/{isbn}", response_model=None)
 async def search_book_datasource(
-    isbn: str,
+    isbn: Annotated[
+        str,
+        Path(
+            min_length=10,
+            max_length=17,
+            pattern=r"^(\d|\-){10,17}$",
+        ),
+    ],
     context: Annotated[Context, Depends(_build_context)],
     google_books_repository: Annotated[ApiService, Depends(_google_factory)],
     openlibrary_repository: Annotated[ApiService, Depends(_openlibrary_factory)],
